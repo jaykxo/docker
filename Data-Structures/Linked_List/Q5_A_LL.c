@@ -104,16 +104,19 @@ void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, Linke
 {
 	/* add your code here */
 
+	// 리스트가 비었으면 아무 작업도 하지 않음
 	if (ll == NULL || ll->size == 0) return;
 
-	int mid = (ll->size + 1) / 2;  // front 리스트가 하나 더 많게
+	int mid = (ll->size + 1) / 2;  // 앞쪽 리스트가 하나 더 많도록 중간 인덱스 계산
 	ListNode *cur = ll->head;
 
+	// 앞쪽 리스트에 mid개 노드 복사
 	for (int i = 0; i < mid; i++) {
 	    insertNode(resultFrontList, resultFrontList->size, cur->item);
 	    cur = cur->next;
 	}
 
+	// 나머지 노드들을 뒤쪽 리스트에 복사
 	while (cur != NULL) {
 	    insertNode(resultBackList, resultBackList->size, cur->item);
 	    cur = cur->next;
