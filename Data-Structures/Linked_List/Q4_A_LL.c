@@ -86,7 +86,7 @@ int main()
 
 void moveEvenItemsToBack(LinkedList *ll)
 {
-	/* add your code here */
+	//* add your code here *//
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

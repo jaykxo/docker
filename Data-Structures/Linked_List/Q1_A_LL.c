@@ -91,6 +91,35 @@ int main()
 int insertSortedLL(LinkedList *ll, int item)
 {
 	/* add your code here */
+	
+	if (ll == NULL) return -1; // 리스트가 존재하는지 확인
+
+    if (ll->size == 0) {
+        // 리스트가 비어있다면 0번째에 삽입
+        insertNode(ll, 0, item);
+        return 0;
+    }
+
+    ListNode *curr = ll->head;
+    int index = 0;
+
+    while (curr != NULL) {
+        if (curr->item == item)
+            return -1; // 중복된 값이라면 넣지 않기
+
+        if (curr->item > item) {
+            // 지금 자리가 삽입할 곳이라면 넣기
+            insertNode(ll, index, item);
+            return index;
+        }
+
+        curr = curr->next;
+        index++;
+    }
+
+    // 맨 끝까지도 못 들어갔으면 → 마지막에 넣기
+    insertNode(ll, index, item);
+    return index;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

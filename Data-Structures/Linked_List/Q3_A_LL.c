@@ -87,6 +87,50 @@ int main()
 void moveOddItemsToBack(LinkedList *ll)
 {
 	/* add your code here */
+
+	if (ll == NULL || ll->head == NULL) return;
+
+    ListNode *cur = ll->head;
+    ListNode *prev = NULL;
+    ListNode *tail = ll->head;
+
+    // Step 1: Find the tail (last node) of the original list
+    while (tail->next != NULL) {
+        tail = tail->next;
+    }
+
+    ListNode *end = tail; // To know where the original end is
+    ListNode *newTail = tail; // To keep track of where to append
+
+    cur = ll->head;
+    while (cur != NULL && cur != end->next) {
+        if (cur->item % 2 != 0) { // It's odd
+            ListNode *oddNode = cur;
+            if (cur == ll->head) {
+                ll->head = cur->next;
+                cur = ll->head;
+            } else {
+                prev->next = cur->next;
+                cur = cur->next;
+            }
+            oddNode->next = NULL;
+            newTail->next = oddNode;
+            newTail = oddNode;
+            ll->size--; // temporarily decrease, will fix later
+        } else {
+            prev = cur;
+            cur = cur->next;
+        }
+    }
+
+    // Fix size by counting from head
+    int count = 0;
+    cur = ll->head;
+    while (cur != NULL) {
+        count++;
+        cur = cur->next;
+    }
+    ll->size = count;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
